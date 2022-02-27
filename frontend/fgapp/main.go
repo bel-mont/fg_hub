@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 
@@ -14,10 +15,52 @@ type hello struct {
 	app.Compo
 }
 
+func (f *hello) OnPreRender(ctx app.Context) {
+	fmt.Println("component prerendered, server side")
+}
+
+func (f *hello) OnMount(ctx app.Context) {
+	fmt.Println("component mounted into dom")
+}
+
+func (f *hello) OnNav(ctx app.Context) {
+	fmt.Println("component navigated client side")
+}
+
+func (f *hello) OnDismount() {
+	fmt.Println("component dismounted from dom, client side")
+}
+
 // The Render method is where the component appearance is defined. Here, a
 // "Hello World!" is displayed as a heading.
 func (h *hello) Render() app.UI {
-	return app.H1().Text("Hello World!")
+	return app.Div().ID("app").Body(
+		app.Aside().Class("side-menu").Body(
+			app.Div().Class("side-menu-title").Body(
+				app.H1().Body(
+					app.Text("FG Hub"),
+				),
+			),
+			app.Div().Class("side-menu-game-select").Body(
+				app.H2().Body(
+					app.Text("Select a Game"),
+				),
+			),
+			app.Div().Class("side-menu-contextual-menu").Body(
+				app.P().Body(
+					app.Text("Game Dependent Contextual Menu"),
+				),
+			),
+		),
+		app.Main().Class("app-body").Body(
+			app.H1().Body(
+				app.Text("Welcome to FG Hub"),
+			),
+			app.P().Body(
+				app.Text("To start, pick a game from the menu on the left"),
+			),
+		),
+	)
 }
 
 // The main function is the entry point where the app is configured and started.
@@ -50,8 +93,13 @@ func main() {
 	// required resources to make it work into a web browser. Here it is
 	// configured to handle requests with a path that starts with "/".
 	http.Handle("/", &app.Handler{
-		Name:        "Hello",
-		Description: "An Hello World! example",
+		Name:        "Hello kind sir",
+		Description: "A Hello World! example",
+		Title:       "FG Hub",
+		Styles: []string{
+			"/web/css/normalize.css",
+			"/web/css/main.css",
+		},
 	})
 
 	if err := http.ListenAndServe(":8000", nil); err != nil {
