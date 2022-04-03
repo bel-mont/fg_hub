@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fg_hub/core/utils"
 	"fmt"
 	"log"
 	"net/http"
@@ -34,12 +35,14 @@ func (f *hello) OnDismount() {
 // The Render method is where the component appearance is defined. Here, a
 // "Hello World!" is displayed as a heading.
 func (h *hello) Render() app.UI {
+	pkgSample := utils.Even(4)
 	return app.Div().ID("app").Body(
 		app.Aside().Class("side-menu").Body(
 			app.Div().Class("side-menu-title").Body(
 				app.H1().Body(
 					app.Text("FG Hub"),
 				),
+				// app.Img().Src("web/img/logo.png"),
 			),
 			app.Div().Class("side-menu-game-select").Body(
 				app.H2().Body(
@@ -48,7 +51,7 @@ func (h *hello) Render() app.UI {
 			),
 			app.Div().Class("side-menu-contextual-menu").Body(
 				app.P().Body(
-					app.Text("Game Dependent Contextual Menu"),
+					app.Text("Game Dependent Contextual Menu", pkgSample),
 				),
 			),
 		),
