@@ -1,0 +1,24 @@
+# Dev environment compose
+version: '3.8'
+
+services:
+  # ---------------- db container ---------------- #
+  db:
+    image: fghub-db
+    logging:
+      options:
+        max-size: "1m"
+        max-file: "3"
+    container_name: fghub-db
+    restart: always
+    build:
+      context: ./docker/db
+    deploy:
+      resources:
+        limits:
+          memory: 1024M
+    environment:
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: fghub-db
+    ports:
+      - 5432:5432
