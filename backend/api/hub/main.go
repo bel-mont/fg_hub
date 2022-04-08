@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fg_hub/backend/db/rdb"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -55,6 +56,7 @@ func getGameById(c *gin.Context) {
 }
 
 func main() {
+	rdb.Test()
 	router := gin.Default()
 	router.GET("/game", getGames)
 	router.GET("/game/:id", getGameById)

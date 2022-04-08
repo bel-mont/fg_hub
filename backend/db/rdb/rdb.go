@@ -1,4 +1,4 @@
-package main
+package rdb
 
 import (
 	"gorm.io/driver/postgres"
@@ -12,7 +12,7 @@ type Game struct {
 	Title string
 }
 
-func main() {
+func Test() {
 	const dsn = "host=localhost user=postgres password=root dbname=fghub-db port=5432 sslmode=disable TimeZone=Asia/Tokyo"
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {

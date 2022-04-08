@@ -1,4 +1,4 @@
-module fg_hub/backend/db
+module fg_hub/backend/db/rdb
 
 go 1.17
 
