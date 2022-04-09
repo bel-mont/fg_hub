@@ -1,8 +1,9 @@
 package main
 
 import (
-	"fg_hub/backend/db/rdb"
 	"net/http"
+
+	"github.com/bel-mont/fg_hub/backend/db/rdb"
 
 	"github.com/gin-gonic/gin"
 )
@@ -55,11 +56,17 @@ func getGameById(c *gin.Context) {
 	c.IndentedJSON(http.StatusNotFound, gin.H{"message": "game not found"})
 }
 
+func getRdbData(c *gin.Context) {
+	rdbTest := rdb.ReadTest()
+	c.IndentedJSON(http.StatusOK, rdbTest)
+}
+
 func main() {
-	rdb.Test()
+	// rdb.Test()
 	router := gin.Default()
 	router.GET("/game", getGames)
 	router.GET("/game/:id", getGameById)
+	router.GET("/sf5", getRdbData)
 	router.POST("/game", postGames)
 	router.Run("localhost:8080")
 }

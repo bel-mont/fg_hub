@@ -12,6 +12,19 @@ type Game struct {
 	Title string
 }
 
+func ReadTest() Game {
+	const dsn = "host=localhost user=postgres password=root dbname=fghub-db port=5432 sslmode=disable TimeZone=Asia/Tokyo"
+	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	if err != nil {
+		panic("failed to connect database")
+	}
+
+	var sf5 Game
+	db.First(&sf5, "ID = ?", "CPNSF5")
+
+	return sf5
+}
+
 func Test() {
 	const dsn = "host=localhost user=postgres password=root dbname=fghub-db port=5432 sslmode=disable TimeZone=Asia/Tokyo"
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})

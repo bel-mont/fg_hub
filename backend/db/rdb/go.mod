@@ -1,6 +1,6 @@
 module fg_hub/backend/db/rdb
 
-go 1.17
+go 1.18
 
 require (
 	gorm.io/driver/postgres v1.3.3
