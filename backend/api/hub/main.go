@@ -1,9 +1,8 @@
 package main
 
 import (
+	"fg_hub/backend/db/rdb"
 	"net/http"
-
-	"github.com/bel-mont/fg_hub/backend/db/rdb"
 
 	"github.com/gin-gonic/gin"
 )

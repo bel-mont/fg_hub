@@ -35,7 +35,7 @@ func (f *hello) OnDismount() {
 // The Render method is where the component appearance is defined. Here, a
 // "Hello World!" is displayed as a heading.
 func (h *hello) Render() app.UI {
-	pkgSample := utils.Even(4)
+	_ = utils.Even(4)
 	return app.Div().ID("app").Body(
 		app.Aside().Class("side-menu").Body(
 			app.Div().Class("side-menu-title").Body(
@@ -51,7 +51,7 @@ func (h *hello) Render() app.UI {
 			),
 			app.Div().Class("side-menu-contextual-menu").Body(
 				app.P().Body(
-					app.Text("Game Dependent Contextual Menu", pkgSample),
+					app.Text("Game Dependent Contextual Menu"),
 				),
 			),
 		),
