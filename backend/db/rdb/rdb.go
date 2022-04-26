@@ -9,7 +9,6 @@ package rdb
 // https://www.howtographql.com/basics/3-big-picture/
 import (
 	"github.com/golang-migrate/migrate/v4"
-	"github.com/jackc/pgx/v4"
 	"log"
 
 	_ "github.com/golang-migrate/migrate/v4/database/pgx"
@@ -24,8 +23,8 @@ func Test() {
 	// m.Steps(2)
 }
 
-var Conn *pgx.Conn
-var databaseUrl = "host=localhost user=postgres password=root dbname=fghub port=5432 sslmode=disable TimeZone=Asia/Tokyo"
+//var Conn *pgx.Conn
+//var databaseUrl = "host=localhost user=postgres password=root dbname=fghub port=5432 sslmode=disable TimeZone=Asia/Tokyo"
 var databaseUrl2 = "pgx://postgres:root@localhost:5432/fghub?sslmode=disable"
 
 func InitDB() {
@@ -73,13 +72,16 @@ func Migrate() {
 	//if err := m.Up(); err != nil && err != migrate.ErrNoChange {
 	//	log.Fatal(err)
 	//}C:\Users\cidhi\go\src\fg_hub\backend\db\rdb\migrations
+	//filePath := "file://fg_hub/backend/db/rdb/migrations"
+	// for now, relative because it is breaking when called from another module
+	filePath := "file://../../db/rdb/migrations"
 	m, err := migrate.New(
-		"file:///fg_hub/backend/db/rdb/migrations",
+		filePath,
 		databaseUrl2)
 	if err != nil {
 		log.Fatal("Migration error", err)
 	}
 	if err := m.Up(); err != nil {
-		log.Fatal("Up error", err)
+		log.Println("Up error", err)
 	}
 }
