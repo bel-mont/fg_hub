@@ -8,8 +8,12 @@ package rdb
 // https://www.apollographql.com/blog/graphql/golang/using-graphql-with-golang/
 // https://www.howtographql.com/basics/3-big-picture/
 import (
+	"context"
+	"fmt"
 	"github.com/golang-migrate/migrate/v4"
+	"github.com/jackc/pgx/v4"
 	"log"
+	"os"
 
 	_ "github.com/golang-migrate/migrate/v4/database/pgx"
 	_ "github.com/golang-migrate/migrate/v4/source/file"
@@ -23,9 +27,11 @@ func Test() {
 	// m.Steps(2)
 }
 
-//var Conn *pgx.Conn
+var Conn *pgx.Conn
+
 //var databaseUrl = "host=localhost user=postgres password=root dbname=fghub port=5432 sslmode=disable TimeZone=Asia/Tokyo"
-var databaseUrl2 = "pgx://postgres:root@localhost:5432/fghub?sslmode=disable"
+var pgxConnStr = "postgres://postgres:root@localhost:5432/fghub?sslmode=disable"
+var pgxMigrateStr = "pgx://postgres:root@localhost:5432/fghub?sslmode=disable"
 
 func InitDB() {
 	// Use root:dbpass@tcp(172.17.0.2)/hackernews, if you're using Windows.
@@ -39,13 +45,13 @@ func InitDB() {
 	// }
 	// Db = db
 	// urlExample := "postgres://username:password@localhost:5432/database_name"
-	//conn, err := pgx.Connect(context.Background(), databaseUrl2)
-	//if err != nil {
-	//	fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
-	//	os.Exit(1)
-	//}
-	//defer conn.Close(context.Background())
-	//Conn = conn
+	conn, err := pgx.Connect(context.Background(), pgxConnStr)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
+		os.Exit(1)
+	}
+	defer conn.Close(context.Background())
+	Conn = conn
 	//
 	//var name string
 	//var weight int64
@@ -77,7 +83,7 @@ func Migrate() {
 	filePath := "file://../../db/rdb/migrations"
 	m, err := migrate.New(
 		filePath,
-		databaseUrl2)
+		pgxMigrateStr)
 	if err != nil {
 		log.Fatal("Migration error", err)
 	}

@@ -7,17 +7,15 @@ import (
 	"context"
 	"fg_hub/backend/api/hub/graph/generated"
 	"fg_hub/backend/api/hub/graph/model"
+	"fg_hub/backend/api/hub/modules/character"
 	"fmt"
 )
 
 func (r *mutationResolver) CreateLink(ctx context.Context, input model.NewLink) (*model.Link, error) {
-	var link model.Link
-	var user model.User
-	link.Address = input.Address
-	link.Title = input.Title
-	user.Name = "test"
-	link.User = &user
-	return &link, nil
+	var char character.Character
+	char.Name = input.Title
+	char.Save()
+	return &model.Link{ID: "12", Title: "", Address: ""}, nil
 }
 
 func (r *mutationResolver) CreateUser(ctx context.Context, input model.NewUser) (string, error) {
