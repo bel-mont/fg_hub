@@ -12,8 +12,8 @@ import (
 	"github.com/jackc/pgx/v4"
 	"log"
 
-	_ "github.com/golang-migrate/migrate/v4/database/postgres"
-	_ "github.com/golang-migrate/migrate/v4/source/github"
+	_ "github.com/golang-migrate/migrate/v4/database/pgx"
+	_ "github.com/golang-migrate/migrate/v4/source/file"
 )
 
 func Test() {
@@ -74,7 +74,7 @@ func Migrate() {
 	//	log.Fatal(err)
 	//}C:\Users\cidhi\go\src\fg_hub\backend\db\rdb\migrations
 	m, err := migrate.New(
-		"file://fg_hub/backend/db/rdb/migrations",
+		"file:///fg_hub/backend/db/rdb/migrations",
 		databaseUrl2)
 	if err != nil {
 		log.Fatal("Migration error", err)
