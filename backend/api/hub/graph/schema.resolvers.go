@@ -7,9 +7,9 @@ import (
 	"context"
 	"fg_hub/backend/api/hub/graph/generated"
 	"fg_hub/backend/api/hub/graph/model"
-	"fmt"
-	"github.com/bel-mont/fg_hub/backend/db/rdb"
 	"log"
+
+	"github.com/bel-mont/fg_hub/backend/db/rdb"
 )
 
 func (r *mutationResolver) CreateGame(ctx context.Context, input model.NewGame) (*model.Game, error) {
@@ -26,7 +26,15 @@ func (r *mutationResolver) CreateGame(ctx context.Context, input model.NewGame) 
 }
 
 func (r *mutationResolver) CreateCharacter(ctx context.Context, input model.NewCharacter) (*model.Character, error) {
-	panic(fmt.Errorf("not implemented"))
+	character := &model.Character{
+		Name: input.Name,
+	}
+	conn := rdb.GetConn()
+	_, err := conn.Exec(context.Background(), "INSERT INTO characters(name, game_id) VALUES($1,$2)", input.Name, input.GameID)
+	if err != nil {
+		log.Println("Exec error", err)
+	}
+	return character, nil
 }
 
 // Mutation returns generated.MutationResolver implementation.

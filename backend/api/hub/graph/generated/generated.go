@@ -221,6 +221,7 @@ type Character {
 
 input NewCharacter {
   name: String!
+  gameId: String!
 }
 
 input NewGame {
@@ -1854,6 +1855,14 @@ func (ec *executionContext) unmarshalInputNewCharacter(ctx context.Context, obj 
 
 			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("name"))
 			it.Name, err = ec.unmarshalNString2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+		case "gameId":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("gameId"))
+			it.GameID, err = ec.unmarshalNString2string(ctx, v)
 			if err != nil {
 				return it, err
 			}

@@ -3,7 +3,8 @@
 package model
 
 type NewCharacter struct {
-	Name string `json:"name"`
+	Name   string `json:"name"`
+	GameID string `json:"gameId"`
 }
 
 type NewGame struct {

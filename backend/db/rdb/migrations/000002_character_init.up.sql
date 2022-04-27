@@ -1,4 +1,3 @@
--- Sample only, redo/delete later
 CREATE TABLE IF NOT EXISTS characters(
    id uuid PRIMARY KEY,
    created_at timestamp,
