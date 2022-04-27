@@ -1,8 +1,7 @@
-package character
+package model
 
 import (
 	"context"
-	"fg_hub/backend/api/hub/modules/game"
 	"github.com/bel-mont/fg_hub/backend/db/rdb"
 	"log"
 )
@@ -11,7 +10,7 @@ type Character struct {
 	ID        string `json:"id"`
 	Name      string `json:"name"`
 	CreatedAt string `json:"created_at"`
-	Game      *game.Game
+	Game      *Game
 }
 
 //#2

@@ -2,48 +2,28 @@
 #
 # https://gqlgen.com/getting-started/
 
-type Link {
+type Game {
   id: ID!
-  title: String!
-  address: String!
-  user: User!
+  name: String!
 }
 
 type Character {
   id: ID!
   name: String!
-}
-
-type User {
-  id: ID!
-  name: String!
-}
-
-type Query {
-  links: [Link!]!
+  game: Game!
 }
 
 input NewCharacter {
   name: String!
 }
 
-input RefreshTokenInput{
-  token: String!
+input NewGame {
+  id: ID!
+  name: String!
 }
 
-input NewUser {
-  username: String!
-  password: String!
-}
-
-input Login {
-  username: String!
-  password: String!
-}
 
 type Mutation {
+  createGame(input: NewGame!): Game!
   createCharacter(input: NewCharacter!): Character!
-  createUser(input: NewUser!): String!
-  login(input: Login!): String!
-  refreshToken(input: RefreshTokenInput!): String!
 }
