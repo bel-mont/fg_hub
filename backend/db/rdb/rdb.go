@@ -64,6 +64,15 @@ func InitDB() {
 	//fmt.Println(name, weight)
 }
 
+func GetConn() *pgx.Conn {
+	conn, err := pgx.Connect(context.Background(), pgxConnStr)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
+		os.Exit(1)
+	}
+	return conn
+}
+
 func Migrate() {
 
 	//if err := Conn.Ping(context.Background()); err != nil {

@@ -8,12 +8,19 @@ import (
 	"fg_hub/backend/api/hub/graph/generated"
 	"fg_hub/backend/api/hub/graph/model"
 	"fmt"
+	"github.com/bel-mont/fg_hub/backend/db/rdb"
+	"log"
 )
 
 func (r *mutationResolver) CreateGame(ctx context.Context, input model.NewGame) (*model.Game, error) {
 	game := &model.Game{
 		ID:   input.ID,
 		Name: input.Name,
+	}
+	conn := rdb.GetConn()
+	_, err := conn.Exec(context.Background(), "INSERT INTO games(id, name) VALUES($1,$2)", input.ID, input.Name)
+	if err != nil {
+		log.Println("Exec error", err)
 	}
 	return game, nil
 }
