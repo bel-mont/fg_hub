@@ -5,6 +5,7 @@
 type Game {
   id: ID!
   name: String!
+  slug: String!
 }
 
 type Character {
@@ -19,7 +20,7 @@ input NewCharacter {
 }
 
 input NewGame {
-  id: ID!
+  slug: String!
   name: String!
 }
 

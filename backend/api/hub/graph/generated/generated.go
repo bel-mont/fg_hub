@@ -9,6 +9,7 @@ import (
 	"fg_hub/backend/api/hub/graph/model"
 	"strconv"
 	"sync"
+	"sync/atomic"
 
 	"github.com/99designs/gqlgen/graphql"
 	"github.com/99designs/gqlgen/graphql/introspection"
@@ -34,6 +35,7 @@ type Config struct {
 }
 
 type ResolverRoot interface {
+	Game() GameResolver
 	Mutation() MutationResolver
 }
 
@@ -50,6 +52,7 @@ type ComplexityRoot struct {
 	Game struct {
 		ID   func(childComplexity int) int
 		Name func(childComplexity int) int
+		Slug func(childComplexity int) int
 	}
 
 	Mutation struct {
@@ -61,6 +64,9 @@ type ComplexityRoot struct {
 	}
 }
 
+type GameResolver interface {
+	Slug(ctx context.Context, obj *model.Game) (string, error)
+}
 type MutationResolver interface {
 	CreateGame(ctx context.Context, input model.NewGame) (*model.Game, error)
 	CreateCharacter(ctx context.Context, input model.NewCharacter) (*model.Character, error)
@@ -115,6 +121,13 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Game.Name(childComplexity), true
+
+	case "Game.slug":
+		if e.complexity.Game.Slug == nil {
+			break
+		}
+
+		return e.complexity.Game.Slug(childComplexity), true
 
 	case "Mutation.createCharacter":
 		if e.complexity.Mutation.CreateCharacter == nil {
@@ -211,6 +224,7 @@ var sources = []*ast.Source{
 type Game {
   id: ID!
   name: String!
+  slug: String!
 }
 
 type Character {
@@ -225,7 +239,7 @@ input NewCharacter {
 }
 
 input NewGame {
-  id: ID!
+  slug: String!
   name: String!
 }
 
@@ -484,6 +498,41 @@ func (ec *executionContext) _Game_name(ctx context.Context, field graphql.Collec
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
 		return obj.Name, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _Game_slug(ctx context.Context, field graphql.CollectedField, obj *model.Game) (ret graphql.Marshaler) {
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	fc := &graphql.FieldContext{
+		Object:     "Game",
+		Field:      field,
+		Args:       nil,
+		IsMethod:   true,
+		IsResolver: true,
+	}
+
+	ctx = graphql.WithFieldContext(ctx, fc)
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Game().Slug(rctx, obj)
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -1881,11 +1930,11 @@ func (ec *executionContext) unmarshalInputNewGame(ctx context.Context, obj inter
 
 	for k, v := range asMap {
 		switch k {
-		case "id":
+		case "slug":
 			var err error
 
-			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("id"))
-			it.ID, err = ec.unmarshalNID2string(ctx, v)
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("slug"))
+			it.Slug, err = ec.unmarshalNString2string(ctx, v)
 			if err != nil {
 				return it, err
 			}
@@ -1980,7 +2029,7 @@ func (ec *executionContext) _Game(ctx context.Context, sel ast.SelectionSet, obj
 			out.Values[i] = innerFunc(ctx)
 
 			if out.Values[i] == graphql.Null {
-				invalids++
+				atomic.AddUint32(&invalids, 1)
 			}
 		case "name":
 			innerFunc := func(ctx context.Context) (res graphql.Marshaler) {
@@ -1990,8 +2039,28 @@ func (ec *executionContext) _Game(ctx context.Context, sel ast.SelectionSet, obj
 			out.Values[i] = innerFunc(ctx)
 
 			if out.Values[i] == graphql.Null {
-				invalids++
+				atomic.AddUint32(&invalids, 1)
 			}
+		case "slug":
+			field := field
+
+			innerFunc := func(ctx context.Context) (res graphql.Marshaler) {
+				defer func() {
+					if r := recover(); r != nil {
+						ec.Error(ctx, ec.Recover(ctx, r))
+					}
+				}()
+				res = ec._Game_slug(ctx, field, obj)
+				if res == graphql.Null {
+					atomic.AddUint32(&invalids, 1)
+				}
+				return res
+			}
+
+			out.Concurrently(i, func() graphql.Marshaler {
+				return innerFunc(ctx)
+
+			})
 		default:
 			panic("unknown field " + strconv.Quote(field.Name))
 		}
