@@ -15,6 +15,7 @@ type Game struct {
 
 func (game Game) Save() (Game, error) {
 	conn, _ := rdb.GetConn()
+
 	_, err := conn.Exec(context.Background(), "INSERT INTO games(slug, name) VALUES($1,$2)", game.Slug, game.Name)
 
 	if err != nil {

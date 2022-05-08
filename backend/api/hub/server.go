@@ -21,7 +21,6 @@ func main() {
 		port = defaultPort
 	}
 
-	rdb.InitDB()
 	rdb.Migrate()
 	srv := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{Resolvers: &graph.Resolver{}}))
 
