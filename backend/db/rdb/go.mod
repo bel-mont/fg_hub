@@ -4,7 +4,10 @@ go 1.18
 
 require (
 	github.com/golang-migrate/migrate/v4 v4.15.1
-	github.com/jackc/pgx/v4 v4.16.0
+	github.com/google/uuid v1.3.0
+	github.com/uptrace/bun v1.1.4
+	github.com/uptrace/bun/dialect/pgdialect v1.1.4
+	github.com/uptrace/bun/driver/pgdriver v1.1.4
 )
 
 require (
@@ -18,11 +21,9 @@ require (
 	github.com/jackc/pgproto3/v2 v2.3.0 // indirect
 	github.com/jackc/pgservicefile v0.0.0-20200714003250-2b9c44734f2b // indirect
 	github.com/jackc/pgtype v1.11.0 // indirect
+	github.com/jackc/pgx/v4 v4.16.0 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/tmthrgd/go-hex v0.0.0-20190904060850-447a3041c3bc // indirect
-	github.com/uptrace/bun v1.1.4 // indirect
-	github.com/uptrace/bun/dialect/pgdialect v1.1.4 // indirect
-	github.com/uptrace/bun/driver/pgdriver v1.1.4 // indirect
 	github.com/vmihailenco/msgpack/v5 v5.3.5 // indirect
 	github.com/vmihailenco/tagparser/v2 v2.0.0 // indirect
 	go.uber.org/atomic v1.7.0 // indirect
