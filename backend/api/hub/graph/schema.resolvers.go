@@ -22,8 +22,8 @@ func (r *mutationResolver) CreateGame(ctx context.Context, input model.NewGame) 
 		Slug: input.Slug,
 		Name: input.Name,
 	}
-	conn := rdb.GetConn()
-	_, err := conn.Exec(context.Background(), "INSERT INTO games(slug, name) VALUES($1,$2)", input.Slug, input.Name)
+	_, err := game.Save()
+
 	if err != nil {
 		log.Println("Exec error", err)
 	}
@@ -34,7 +34,7 @@ func (r *mutationResolver) CreateCharacter(ctx context.Context, input model.NewC
 	character := &model.Character{
 		Name: input.Name,
 	}
-	conn := rdb.GetConn()
+	conn, _ := rdb.GetConn()
 	_, err := conn.Exec(context.Background(), "INSERT INTO characters(name, game_id) VALUES($1,$2)", input.Name, input.GameID)
 	if err != nil {
 		log.Println("Exec error", err)

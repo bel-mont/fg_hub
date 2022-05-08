@@ -1,0 +1,12 @@
+# output   = "models"
+wipe     = true
+# no-tests = false
+add-enum-types = true
+
+[psql]
+dbname = "fghub"
+host = "localhost"
+user = "postgres"
+pass = "root"
+sslmode = "disable"
+blacklist = ["schema_migrations"]
