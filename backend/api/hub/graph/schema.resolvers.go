@@ -9,8 +9,6 @@ import (
 	"fg_hub/backend/api/hub/graph/model"
 	"fmt"
 	"log"
-
-	"github.com/bel-mont/fg_hub/backend/db/rdb"
 )
 
 func (r *gameResolver) Slug(ctx context.Context, obj *model.Game) (string, error) {
@@ -34,11 +32,11 @@ func (r *mutationResolver) CreateCharacter(ctx context.Context, input model.NewC
 	character := &model.Character{
 		Name: input.Name,
 	}
-	conn, _ := rdb.GetConn()
-	_, err := conn.Exec(context.Background(), "INSERT INTO characters(name, game_id) VALUES($1,$2)", input.Name, input.GameID)
-	if err != nil {
-		log.Println("Exec error", err)
-	}
+	//conn, _ := rdb.GetConn()
+	//_, err := conn.Exec(context.Background(), "INSERT INTO characters(name, game_id) VALUES($1,$2)", input.Name, input.GameID)
+	//if err != nil {
+	//	log.Println("Exec error", err)
+	//}
 	return character, nil
 }
 

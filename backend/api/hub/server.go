@@ -3,14 +3,12 @@ package main
 import (
 	"fg_hub/backend/api/hub/graph"
 	"fg_hub/backend/api/hub/graph/generated"
+	"fg_hub/backend/db/rdb"
+	"github.com/99designs/gqlgen/graphql/handler"
+	"github.com/99designs/gqlgen/graphql/playground"
 	"log"
 	"net/http"
 	"os"
-
-	"github.com/bel-mont/fg_hub/backend/db/rdb"
-
-	"github.com/99designs/gqlgen/graphql/handler"
-	"github.com/99designs/gqlgen/graphql/playground"
 )
 
 const defaultPort = "80"
