@@ -3,7 +3,6 @@ package main
 import (
 	"net/http"
 
-	"github.com/bel-mont/fg_hub/backend/db/rdb"
 	"github.com/gin-gonic/gin"
 )
 
