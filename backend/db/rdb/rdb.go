@@ -1,8 +1,10 @@
 package rdb
 
 import (
+	"context"
 	"database/sql"
 	"fg_hub/backend/db/rdb/migrations"
+	"fmt"
 	_ "github.com/golang-migrate/migrate/v4/database/pgx"
 	_ "github.com/golang-migrate/migrate/v4/source/file"
 	"github.com/uptrace/bun"
@@ -26,18 +28,15 @@ func GetConn() *bun.DB {
 
 func Migrate() {
 	db := GetConn()
-	migrate.NewMigrator(db, migrations.Migrations)
-	//
-	////filePath := "file://fg_hub/backend/db/rdb/migrations"
-	//// for now, relative because it is breaking when called from another module
-	//filePath := "file://../../db/rdb/migrations"
-	//m, err := migrate.New(
-	//	filePath,
-	//	pgxMigrateConnStr)
-	//if err != nil {
-	//	log.Fatal("Migration error", err)
-	//}
-	//if err := m.Up(); err != nil {
-	//	log.Println("Up error", err)
-	//}
+	migrator := migrate.NewMigrator(db, migrations.Migrations)
+	ctx := context.Background()
+	err := migrator.Init(ctx)
+	if err != nil {
+		fmt.Println("Error on migration init: ", err)
+	}
+	migrationGroup, err := migrator.Migrate(ctx)
+	if err != nil {
+		fmt.Println("Error on migrate: ", err)
+	}
+	fmt.Println("Applied migration: ", migrationGroup.ID)
 }
