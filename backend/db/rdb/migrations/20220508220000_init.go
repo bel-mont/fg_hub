@@ -2,7 +2,8 @@ package migrations
 
 import (
 	"context"
-	"fg_hub/backend/db/rdb/models"
+	charModels "fg_hub/backend/db/rdb/modules/character/models"
+	gameModels "fg_hub/backend/db/rdb/modules/game/models"
 	"fmt"
 
 	"github.com/uptrace/bun"
@@ -12,21 +13,21 @@ func init() {
 	Migrations.MustRegister(func(ctx context.Context, db *bun.DB) error {
 		fmt.Println(" Run migration init ")
 		_, err := db.NewCreateTable().
-			Model((*models.Series)(nil)).
+			Model((*gameModels.Series)(nil)).
 			IfNotExists().
 			Exec(ctx)
 		if err != nil {
 			fmt.Println("Could not create table Series, ", err)
 		}
 		_, err = db.NewCreateTable().
-			Model((*models.Game)(nil)).
+			Model((*gameModels.Game)(nil)).
 			IfNotExists().
 			Exec(ctx)
 		if err != nil {
 			fmt.Println("Could not create table Game, ", err)
 		}
 		_, err = db.NewCreateTable().
-			Model((*models.Character)(nil)).
+			Model((*charModels.Character)(nil)).
 			IfNotExists().
 			Exec(ctx)
 		if err != nil {
@@ -36,19 +37,19 @@ func init() {
 	}, func(ctx context.Context, db *bun.DB) error {
 		fmt.Println(" Rollback migration init ")
 		_, err := db.NewDropTable().
-			Model((*models.Character)(nil)).
+			Model((*charModels.Character)(nil)).
 			Exec(ctx)
 		if err != nil {
 			fmt.Println("Could not drop table Character, ", err)
 		}
 		_, err = db.NewDropTable().
-			Model((*models.Game)(nil)).
+			Model((*gameModels.Game)(nil)).
 			Exec(ctx)
 		if err != nil {
 			fmt.Println("Could not drop table Game, ", err)
 		}
 		_, err = db.NewDropTable().
-			Model((*models.Series)(nil)).
+			Model((*gameModels.Series)(nil)).
 			Exec(ctx)
 		if err != nil {
 			fmt.Println("Could not drop table Series, ", err)

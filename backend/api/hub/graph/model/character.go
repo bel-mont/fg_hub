@@ -18,6 +18,7 @@ func (character Character) Save() Character {
 	//if err != nil {
 	//	log.Fatal("Panic!!!!", err)
 	//}
+	// characterService.Save()
 	log.Print("Row inserted!")
 	return character
 }
