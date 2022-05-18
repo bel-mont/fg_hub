@@ -9,7 +9,7 @@ import (
 
 func Save(game coreModels.Game) (*coreModels.Game, error) {
 	conn := rdb.NewConn()
-	newGame := models.Game{Name: game.Name, Slug: game.Slug}
+	newGame := &models.Game{Name: game.Name, Slug: game.Slug}
 	_, err := conn.NewInsert().Model(newGame).On("CONFLICT (id) DO UPDATE").Exec(context.Background())
 	if err != nil {
 		return nil, err
