@@ -6,7 +6,7 @@ import (
 	"bytes"
 	"context"
 	"errors"
-	"fg_hub/backend/api/hub/graph/model"
+	"fg_hub/backend/api/graph/graph/model"
 	"fmt"
 	"strconv"
 	"sync"

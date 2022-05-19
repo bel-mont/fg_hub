@@ -1,8 +1,8 @@
 package main
 
 import (
-	"fg_hub/backend/api/hub/graph"
-	"fg_hub/backend/api/hub/graph/generated"
+	"fg_hub/backend/api/graph/graph"
+	"fg_hub/backend/api/graph/graph/generated"
 	"fg_hub/backend/db/rdb"
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/playground"

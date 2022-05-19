@@ -5,8 +5,8 @@ package graph
 
 import (
 	"context"
-	"fg_hub/backend/api/hub/graph/generated"
-	"fg_hub/backend/api/hub/graph/model"
+	"fg_hub/backend/api/graph/graph/generated"
+	"fg_hub/backend/api/graph/graph/model"
 	"fmt"
 	"log"
 )
