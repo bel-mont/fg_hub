@@ -3,8 +3,8 @@ package game
 type Game struct {
 	ID         string       `json:"id"`
 	Name       string       `json:"name"`
-	CreatedAt  string       `json:"created_at"`
+	CreatedAt  string       `json:"createdAt"`
 	Slug       string       `json:"slug"`
-	SeriesID   string       `json:"series_id"`
+	SeriesID   string       `json:"seriesId"`
 	Characters []*Character `json:"games"`
 }
