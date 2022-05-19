@@ -1,7 +1,10 @@
-# GraphQL schema example
-#
 # https://gqlgen.com/getting-started/
 
+type Series {
+  id: ID!
+  name: String!
+  slug: String!
+}
 type Game {
   id: ID!
   name: String!
@@ -14,6 +17,11 @@ type Character {
   game: Game!
 }
 
+input NewSeries {
+  name: String!
+  slug: String!
+}
+
 input NewCharacter {
   name: String!
   gameId: String!
@@ -22,10 +30,11 @@ input NewCharacter {
 input NewGame {
   slug: String!
   name: String!
+  seriesId: String!
 }
 
-
 type Mutation {
+  createSeries(input: NewSeries!): Series!
   createGame(input: NewGame!): Game!
   createCharacter(input: NewCharacter!): Character!
 }

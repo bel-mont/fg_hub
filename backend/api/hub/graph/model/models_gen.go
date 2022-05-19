@@ -8,6 +8,12 @@ type NewCharacter struct {
 }
 
 type NewGame struct {
-	Slug string `json:"slug"`
+	Slug     string `json:"slug"`
+	Name     string `json:"name"`
+	SeriesID string `json:"seriesId"`
+}
+
+type NewSeries struct {
 	Name string `json:"name"`
+	Slug string `json:"slug"`
 }

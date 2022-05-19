@@ -6,6 +6,7 @@ Other resources to check later
 
 ## Graphql
 Useful commands
+1. Run generator `go run github.com/99designs/gqlgen generate`
 
 ### Resources
 https://gqlgen.com/getting-started/

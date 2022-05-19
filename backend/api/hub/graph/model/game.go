@@ -8,13 +8,14 @@ import (
 type Game struct {
 	ID        string `json:"id"`
 	Name      string `json:"name"`
-	CreatedAt string `json:"created_at"`
+	CreatedAt string `json:"createdAt"`
+	SeriesID  string `json:"seriesId"`
 	Slug      string `json:"slug"`
 }
 
 func (game Game) Save() (*Game, error) {
-	gameModel := coreModels.Game{Name: game.Name, Slug: game.Slug}
-	_, err := service.Save(gameModel)
+	gameModel := coreModels.Game{Name: game.Name, Slug: game.Slug, SeriesID: game.SeriesID}
+	_, err := service.SaveGame(gameModel)
 	if err != nil {
 		return nil, err
 	}
