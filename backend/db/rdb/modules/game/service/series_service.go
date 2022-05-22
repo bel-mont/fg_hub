@@ -19,10 +19,14 @@ func SaveSeries(series coreModels.Series) (*coreModels.Series, error) {
 
 func Find() ([]coreModels.Series, error) {
 	conn := rdb.NewConn()
-	var series []coreModels.Series
-	_, err := conn.NewSelect().Model(&series).Exec(context.Background())
+	var series []models.Series
+	err := conn.NewSelect().Model(&series).Scan(context.Background())
 	if err != nil {
 		return nil, err
 	}
-	return series, nil
+	var convertedModels []coreModels.Series
+	for _, v := range series {
+		convertedModels = append(convertedModels, coreModels.Series{Name: v.Name, ID: v.ID.String(), Slug: v.Slug, CreatedAt: v.CreatedAt.String()})
+	}
+	return convertedModels, nil
 }

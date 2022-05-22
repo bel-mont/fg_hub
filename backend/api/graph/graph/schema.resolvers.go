@@ -47,11 +47,6 @@ func (r *mutationResolver) CreateCharacter(ctx context.Context, input model.NewC
 	character := &model.Character{
 		Name: input.Name,
 	}
-	//conn, _ := rdb.GetConn()
-	//_, err := conn.Exec(context.Background(), "INSERT INTO characters(name, game_id) VALUES($1,$2)", input.Name, input.GameID)
-	//if err != nil {
-	//	log.Println("Exec error", err)
-	//}
 	return character, nil
 }
 
