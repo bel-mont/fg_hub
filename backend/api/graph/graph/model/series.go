@@ -8,7 +8,7 @@ import (
 type Series struct {
 	ID        string `json:"id"`
 	Name      string `json:"name"`
-	CreatedAt string `json:"created_at"`
+	CreatedAt string `json:"createdAt"`
 	Slug      string `json:"slug"`
 }
 

@@ -2,6 +2,11 @@
 
 package model
 
+type Login struct {
+	Username string `json:"username"`
+	Password string `json:"password"`
+}
+
 type NewCharacter struct {
 	Name   string `json:"name"`
 	GameID string `json:"gameId"`
@@ -16,4 +21,18 @@ type NewGame struct {
 type NewSeries struct {
 	Name string `json:"name"`
 	Slug string `json:"slug"`
+}
+
+type NewUser struct {
+	Username string `json:"username"`
+	Password string `json:"password"`
+}
+
+type RefreshTokenInput struct {
+	Token string `json:"token"`
+}
+
+type User struct {
+	ID   string `json:"id"`
+	Name string `json:"name"`
 }

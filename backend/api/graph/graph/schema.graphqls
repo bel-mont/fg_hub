@@ -17,6 +17,12 @@ type Character {
   game: Game!
 }
 
+type Query {
+  series: [Series!]!
+  games: [Game!]!
+  characters: [Character!]!
+}
+
 input NewSeries {
   name: String!
   slug: String!
@@ -33,8 +39,29 @@ input NewGame {
   seriesId: String!
 }
 
+type User {
+  id: ID!
+  name: String!
+}
+
+input RefreshTokenInput{
+  token: String!
+}
+
+input NewUser {
+  username: String!
+  password: String!
+}
+
+input Login {
+  username: String!
+  password: String!
+}
+
 type Mutation {
   createSeries(input: NewSeries!): Series!
   createGame(input: NewGame!): Game!
   createCharacter(input: NewCharacter!): Character!
+  login(input: Login!): String!
+  refreshToken(input: RefreshTokenInput!): String!
 }

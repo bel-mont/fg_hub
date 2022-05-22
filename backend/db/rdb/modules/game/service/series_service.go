@@ -7,12 +7,22 @@ import (
 	coreModels "fg_hub/core/models/game"
 )
 
-func SaveSeries(game coreModels.Series) (*coreModels.Series, error) {
+func SaveSeries(series coreModels.Series) (*coreModels.Series, error) {
 	conn := rdb.NewConn()
-	newSeries := &models.Series{Name: game.Name, Slug: game.Slug}
+	newSeries := &models.Series{Name: series.Name, Slug: series.Slug}
 	_, err := conn.NewInsert().Model(newSeries).On("CONFLICT (id) DO UPDATE").Exec(context.Background())
 	if err != nil {
 		return nil, err
 	}
-	return &game, nil
+	return &series, nil
+}
+
+func Find() ([]coreModels.Series, error) {
+	conn := rdb.NewConn()
+	var series []coreModels.Series
+	_, err := conn.NewSelect().Model(&series).Exec(context.Background())
+	if err != nil {
+		return nil, err
+	}
+	return series, nil
 }
