@@ -1,14 +1,16 @@
 # FG App
-Built with [Go App](https://github.com/maxence-charriere/go-app).
+WASM Application
 
 
 ## Building and running
+Windows compilation might fail. If so, attempt WSL2.
 ### If makefile is available
 `make run`
 
 Otherwise, build both the client and the server separately.
 ### Client
-`GOARCH=wasm GOOS=js go build -o web/app.wasm`
+
+`GOOS=js GOARCH=wasm go build -o  ../../web/assets/json.wasm`
 ### Server
 `go build -o bin/server.exe` 
 

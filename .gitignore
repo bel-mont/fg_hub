@@ -4,6 +4,7 @@
 *.dll
 *.so
 *.dylib
+*.wasm
 
 # Test binary, built with `go test -c`
 *.test
@@ -23,4 +24,5 @@ go.work
 # output
 dist/
 
+# IDE etc
 .idea/
