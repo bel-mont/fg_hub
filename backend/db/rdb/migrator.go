@@ -9,6 +9,8 @@ import (
 	"github.com/uptrace/bun/migrate"
 )
 
+// TODO: Replace all fmt.Prints with a logger
+
 func Migrate() {
 	db := NewConn()
 	migrator := migrate.NewMigrator(db, migrations.Migrations)

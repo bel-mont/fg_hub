@@ -1,7 +1,7 @@
 # FG App
 WASM Application
 
-
+u
 ## Building and running
 Windows compilation might fail. If so, attempt WSL2.
 ### If makefile is available
