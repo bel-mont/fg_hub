@@ -1,0 +1,12 @@
+FROM golang:1.18.3-alpine3.16
+
+ENV APP_ENV dev
+
+RUN apk update && apk upgrade
+
+WORKDIR /usr/src/app
+COPY . ./
+WORKDIR /usr/src/app/backend/api/graph/
+EXPOSE 80
+
+CMD go run main.go

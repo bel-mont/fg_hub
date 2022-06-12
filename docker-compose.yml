@@ -1,6 +1,4 @@
 # Dev environment compose
-version: '3.8'
-
 services:
   # ---------------- db container ---------------- #
   db:
@@ -22,3 +20,42 @@ services:
       POSTGRES_DB: fghub
     ports:
       - 5432:5432
+
+  # ---------------- db container ---------------- #
+  server-graph:
+    image: server-graph
+    logging:
+      options:
+        max-size: "1m"
+        max-file: "3"
+    container_name: server-graph
+    restart: always
+    build:
+      context: ./backend/api/graph/docker
+    deploy:
+      resources:
+        limits:
+          memory: 2048M
+    environment:
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: fghub
+    depends_on:
+      - db
+
+  # ---------------- nginx server container ---------------- #
+  nginx:
+    image: server-nginx
+    logging:
+      options:
+        max-size: "1m"
+        max-file: "3"
+    container_name: server-nginx
+    restart: always
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+    build:
+      context: ./docker/nginx/
+    ports:
+      - 80:80
