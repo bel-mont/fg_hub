@@ -31,7 +31,8 @@ services:
     container_name: server-graph
     restart: always
     build:
-      context: ./backend/api/graph/docker
+      context: .
+      dockerfile: ./backend/api/graph/docker/dockerfile
     deploy:
       resources:
         limits:

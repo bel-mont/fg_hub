@@ -8,7 +8,7 @@ import (
 )
 
 // TODO: Move to a config file / env variables
-var connStr = "postgres://postgres:root@localhost:5432/fghub?sslmode=disable"
+var connStr = "postgres://postgres:root@fghub-db/fghub?sslmode=disable"
 
 // NewConn Fetches a connection
 // TODO: Check connection close

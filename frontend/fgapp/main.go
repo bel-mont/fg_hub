@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fg_hub/frontend/components/nav"
+	"fg_hub/frontend/fgapp/components"
 	"github.com/maxence-charriere/go-app/v9/pkg/app"
 	"log"
 	"net/http"
@@ -15,7 +15,7 @@ func main() {
 	//f
 	// This is done by calling the Route() function,  which tells go-app what
 	// component to display for a given path, on both client and server-side.
-	app.Route("/", &nav.Sidebar{})
+	app.Route("/", &components.Body{})
 
 	// Once the routes set up, the next thing to do is to either launch the app
 	// or the server that serves the app.
@@ -41,7 +41,7 @@ func main() {
 		Description: "Fighting Games",
 	})
 
-	if err := http.ListenAndServe(":8000", nil); err != nil {
+	if err := http.ListenAndServe(":8080", nil); err != nil {
 		log.Fatal(err)
 	}
 }
