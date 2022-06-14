@@ -21,7 +21,7 @@ services:
     ports:
       - 5432:5432
 
-  # ---------------- db container ---------------- #
+  # ---------------- server graph container ---------------- #
   server-graph:
     image: server-graph
     logging:
@@ -42,6 +42,25 @@ services:
       POSTGRES_DB: fghub
     depends_on:
       - db
+
+  # ---------------- client fgapp container ---------------- #
+  client-fgapp:
+    image: client-fgapp
+    logging:
+      options:
+        max-size: "1m"
+        max-file: "3"
+    container_name: client-fgapp
+    restart: always
+    build:
+      context: .
+      dockerfile: ./frontend/fgapp/docker/dockerfile
+    deploy:
+      resources:
+        limits:
+          memory: 2048M
+    depends_on:
+      - server-graph
 
   # ---------------- nginx server container ---------------- #
   nginx:

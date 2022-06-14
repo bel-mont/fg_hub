@@ -8,6 +8,5 @@ COPY . ./
 RUN go mod download
 WORKDIR /app/backend/api/graph/
 RUN go build -o /fghub-graph
-EXPOSE 80
 
 CMD ["/fghub-graph"]

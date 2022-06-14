@@ -3,10 +3,10 @@ FROM golang:1.18.3-alpine3.16
 ENV APP_ENV dev
 RUN apk update && apk upgrade
 
-WORKDIR /usr/app
+WORKDIR /app
 COPY . ./
-WORKDIR /usr/app/frontend/fgapp/
+RUN go mod download
+WORKDIR /app/frontend/fgapp/
 RUN GOOS=js GOARCH=wasm go build -o web/assets/app.wasm && go build -o bin/server
-EXPOSE 80
 
-CMD ./bin/server
+CMD ["./bin/server"]
