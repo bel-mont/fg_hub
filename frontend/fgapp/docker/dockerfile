@@ -7,6 +7,6 @@ WORKDIR /app
 COPY . ./
 RUN go mod download
 WORKDIR /app/frontend/fgapp/
-RUN GOOS=js GOARCH=wasm go build -o web/assets/app.wasm && go build -o bin/server
+RUN GOOS=js GOARCH=wasm go build -o web/app.wasm && go build -o bin/server
 
 CMD ["./bin/server"]
