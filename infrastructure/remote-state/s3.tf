@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "fghub_tf_state" {
-  bucket = "fghub_tf_state"
+  bucket = "fghub-tf-state"
 
   lifecycle {
     prevent_destroy = true
