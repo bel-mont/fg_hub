@@ -6,7 +6,7 @@ resource "aws_vpc" "fghub" {
   enable_dns_hostnames = "true"
   enable_classiclink   = "false"
   tags = {
-    Name = "fghub"
+    Name = var.PLAT_NAME
   }
 }
 
@@ -15,10 +15,10 @@ resource "aws_subnet" "fghub-public-1" {
   vpc_id                  = aws_vpc.fghub.id
   cidr_block              = "10.0.1.0/24"
   map_public_ip_on_launch = "true"
-  availability_zone       = "eu-west-1a"
+  availability_zone       = var.AZ.tokyo.a
 
   tags = {
-    Name = "fghub-public-1"
+    Name = format("%s%s", var.PLAT_NAME, "-public-1")
   }
 }
 
@@ -26,10 +26,10 @@ resource "aws_subnet" "fghub-public-2" {
   vpc_id                  = aws_vpc.fghub.id
   cidr_block              = "10.0.2.0/24"
   map_public_ip_on_launch = "true"
-  availability_zone       = "eu-west-1b"
+  availability_zone       = var.AZ.tokyo.c
 
   tags = {
-    Name = "fghub-public-2"
+    Name = format("%s%s", var.PLAT_NAME, "-public-2")
   }
 }
 
@@ -37,10 +37,10 @@ resource "aws_subnet" "fghub-public-3" {
   vpc_id                  = aws_vpc.fghub.id
   cidr_block              = "10.0.3.0/24"
   map_public_ip_on_launch = "true"
-  availability_zone       = "eu-west-1c"
+  availability_zone       = var.AZ.tokyo.d
 
   tags = {
-    Name = "fghub-public-3"
+    Name = format("%s%s", var.PLAT_NAME, "-public-3")
   }
 }
 
@@ -48,10 +48,10 @@ resource "aws_subnet" "fghub-private-1" {
   vpc_id                  = aws_vpc.fghub.id
   cidr_block              = "10.0.4.0/24"
   map_public_ip_on_launch = "false"
-  availability_zone       = "eu-west-1a"
+  availability_zone       = var.AZ.tokyo.a
 
   tags = {
-    Name = "fghub-private-1"
+    Name = format("%s%s", var.PLAT_NAME, "-private-1")
   }
 }
 
@@ -59,10 +59,10 @@ resource "aws_subnet" "fghub-private-2" {
   vpc_id                  = aws_vpc.fghub.id
   cidr_block              = "10.0.5.0/24"
   map_public_ip_on_launch = "false"
-  availability_zone       = "eu-west-1b"
+  availability_zone       = var.AZ.tokyo.c
 
   tags = {
-    Name = "fghub-private-2"
+    Name = format("%s%s", var.PLAT_NAME, "-private-2")
   }
 }
 
@@ -70,10 +70,10 @@ resource "aws_subnet" "fghub-private-3" {
   vpc_id                  = aws_vpc.fghub.id
   cidr_block              = "10.0.6.0/24"
   map_public_ip_on_launch = "false"
-  availability_zone       = "eu-west-1c"
+  availability_zone       = var.AZ.tokyo.d
 
   tags = {
-    Name = "fghub-private-3"
+    Name = format("%s%s", var.PLAT_NAME, "-private-3")
   }
 }
 
@@ -82,7 +82,7 @@ resource "aws_internet_gateway" "fghub-main-gw" {
   vpc_id = aws_vpc.fghub.id
 
   tags = {
-    Name = "fghub"
+    Name = var.PLAT_NAME
   }
 }
 
@@ -95,7 +95,7 @@ resource "aws_route_table" "fghub-public" {
   }
 
   tags = {
-    Name = "fghub-public-1"
+    Name = format("%s%s", var.PLAT_NAME, "-public-1")
   }
 }
 

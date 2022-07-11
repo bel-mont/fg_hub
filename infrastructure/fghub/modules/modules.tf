@@ -1,3 +1,7 @@
 module "storage" {
-  source = "storage"
+  source = "./storage"
+}
+
+module "network" {
+  source = "./network"
 }

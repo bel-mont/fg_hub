@@ -1,3 +1,3 @@
-module "local-modules" {
-  source = "modules"
+module "local_modules" {
+  source = "./modules"
 }
