@@ -1,3 +1,5 @@
+variable "ENV" {}
+
 variable "PLAT_NAME" {
   default = "fghub"
 }

@@ -1,6 +1,6 @@
 module "storage" {
   source = "./storage"
-  ENV = var.ENV
+#  ENV = var.ENV
 }
 
 module "network" {
