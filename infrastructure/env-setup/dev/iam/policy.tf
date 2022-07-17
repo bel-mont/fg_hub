@@ -1,5 +1,5 @@
 resource "aws_iam_policy" "dev-vpc-access" {
-  name        = "FghubDevVPCAccess"
+  name        = "FGHubDevVPCAccess"
   path        = "/"
   description = "Grants Full control on Dev VPC resources."
 
