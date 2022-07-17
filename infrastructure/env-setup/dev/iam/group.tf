@@ -2,9 +2,15 @@ resource "aws_iam_group" "fghub-devops-dev" {
   name = "fghub-devops-dev"
 }
 
-resource "aws_iam_policy_attachment" "fghub-devops-dev-attach" {
-  name       = "fghub-devops-dev-attach"
-  groups     = [aws_iam_group.fghub-devops-dev.name]
-  // Should it be more granular? Might take a lot of time to set it up properly.
+// Might be better off creating individual policies with granular permissions.
+// For now, using these to speed things up.
+resource "aws_iam_group_policy_attachment" "fghub-devops-dev-vpc" {
+  group     = aws_iam_group.fghub-devops-dev.name
+
   policy_arn = "arn:aws:iam::aws:policy/AmazonVPCFullAccess"
+}
+
+resource "aws_iam_group_policy_attachment" "fghub-devops-dev-ecs" {
+  group     = aws_iam_group.fghub-devops-dev.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonECS_FullAccess"
 }
