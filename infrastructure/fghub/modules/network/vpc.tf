@@ -6,7 +6,7 @@ resource "aws_vpc" "fghub" {
   enable_dns_hostnames = "true"
   enable_classiclink   = "false"
   tags = {
-    Name = "${var.PLAT_NAME}-${var.ENV}"
+    Name = "${var.APP_NAME}-vpc-${var.ENV}"
   }
 }
 
@@ -18,7 +18,7 @@ resource "aws_subnet" "fghub-public-1" {
   availability_zone       = var.AZ.tokyo.a
 
   tags = {
-    Name = "${var.PLAT_NAME}-${var.ENV}-public-1"
+    Name = "${var.APP_NAME}-${var.ENV}-public-1"
   }
 }
 
@@ -29,7 +29,7 @@ resource "aws_subnet" "fghub-public-2" {
   availability_zone       = var.AZ.tokyo.c
 
   tags = {
-    Name = "${var.PLAT_NAME}-${var.ENV}-public-2"
+    Name = "${var.APP_NAME}-${var.ENV}-public-2"
   }
 }
 
@@ -40,7 +40,7 @@ resource "aws_subnet" "fghub-public-3" {
   availability_zone       = var.AZ.tokyo.d
 
   tags = {
-    Name = "${var.PLAT_NAME}-${var.ENV}-public-3"
+    Name = "${var.APP_NAME}-${var.ENV}-public-3"
   }
 }
 
@@ -51,7 +51,7 @@ resource "aws_subnet" "fghub-private-1" {
   availability_zone       = var.AZ.tokyo.a
 
   tags = {
-    Name = "${var.PLAT_NAME}-${var.ENV}-private-1"
+    Name = "${var.APP_NAME}-${var.ENV}-private-1"
   }
 }
 
@@ -62,7 +62,7 @@ resource "aws_subnet" "fghub-private-2" {
   availability_zone       = var.AZ.tokyo.c
 
   tags = {
-    Name = "${var.PLAT_NAME}-${var.ENV}-private-2"
+    Name = "${var.APP_NAME}-${var.ENV}-private-2"
   }
 }
 
@@ -73,7 +73,7 @@ resource "aws_subnet" "fghub-private-3" {
   availability_zone       = var.AZ.tokyo.d
 
   tags = {
-    Name = "${var.PLAT_NAME}-${var.ENV}-private-3"
+    Name = "${var.APP_NAME}-${var.ENV}-private-3"
   }
 }
 
@@ -82,7 +82,7 @@ resource "aws_internet_gateway" "fghub-main-gw" {
   vpc_id = aws_vpc.fghub.id
 
   tags = {
-    Name = var.PLAT_NAME
+    Name = var.APP_NAME
   }
 }
 
@@ -95,7 +95,7 @@ resource "aws_route_table" "fghub-public" {
   }
 
   tags = {
-    Name = "${var.PLAT_NAME}-${var.ENV}-public-1"
+    Name = "${var.APP_NAME}-${var.ENV}-public-1"
   }
 }
 

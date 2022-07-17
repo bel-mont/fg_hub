@@ -1,6 +1,6 @@
 variable "ENV" {}
 
-variable "PLAT_NAME" {
+variable "APP_NAME" {
   default = "fghub"
 }
 
