@@ -1,3 +1,3 @@
-resource "aws_ecr_repository" "fgweb-prod" {
-  name = "fgweb-prod"
+resource "aws_ecr_repository" "fgweb" {
+  name = "fgweb-${var.ENV}"
 }
