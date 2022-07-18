@@ -1,8 +1,8 @@
-## cluster
-#resource "aws_ecs_cluster" "fgapp-cluster" {
-#  name = "fgapp-cluster"
-#}
-#
+# cluster
+resource "aws_ecs_cluster" "fghub-cluster-dev" {
+  name = "fghub-cluster-${var.ENV}"
+}
+
 #resource "aws_launch_configuration" "fgapp-ecs-launchconfig" {
 #  name_prefix          = "ecs-launchconfig"
 #  image_id             = var.AMI[var.AWS_REGION]

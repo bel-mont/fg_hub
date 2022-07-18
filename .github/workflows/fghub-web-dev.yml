@@ -1,0 +1,23 @@
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: "Reason to trigger"
+        required: false
+        default: "Manual Run"
+  release:
+    types: [created]
+  push:
+    branches:
+      - fghubweb/dev/*
+
+
+name: AWS FGHub Web Dev
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+  test:
+    name: Test
+    runs-on: ubuntu-latest

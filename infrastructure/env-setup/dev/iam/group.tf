@@ -14,3 +14,8 @@ resource "aws_iam_group_policy_attachment" "fghub-devops-dev-ecs" {
   group     = aws_iam_group.fghub-devops-dev.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonECS_FullAccess"
 }
+
+resource "aws_iam_group_policy_attachment" "fghub-devops-dev-ecr" {
+  group     = aws_iam_group.fghub-devops-dev.name
+  policy_arn = aws_iam_policy.dev-ecr-access.arn
+}
