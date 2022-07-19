@@ -1,5 +1,5 @@
 provider "aws" {
-  region = var.AWS_REGION
+  region  = var.REGION
   profile = "fghub-bel-mont"
   default_tags {
     tags = {

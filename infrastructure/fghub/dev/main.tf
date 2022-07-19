@@ -1,4 +1,5 @@
 module "local_modules" {
   source = "../modules"
-  ENV = var.ENV
+  ENV    = var.ENV
+  REGION = var.REGION
 }

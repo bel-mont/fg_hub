@@ -21,3 +21,7 @@ output "fghub-private-2" {
 output "fghub-private-3" {
   value = aws_subnet.fghub-private-3.id
 }
+
+output "fghub-vpc-id" {
+  value = aws_vpc.fghub.id
+}

@@ -1,9 +1,8 @@
 resource "aws_ecs_service" "fghub-web-dev" {
-  name            = "fghub-web-dev"
+  name            = "fghub-web-${var.ENV}"
   cluster         = aws_ecs_cluster.fghub-cluster-dev.id
   task_definition = aws_ecs_task_definition.fghub-web.arn
   desired_count   = 1
-  launch_type     = "FARGATE"
   network_configuration {
     subnets = var.SUBNETS
   }
