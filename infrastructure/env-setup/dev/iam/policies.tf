@@ -31,6 +31,7 @@ resource "aws_iam_policy" "dev-ec2-access" {
       {
         Action = [
           "ec2:ImportKeyPair",
+          "ec2:DeleteKeyPair",
         ]
         Effect   = "Allow"
         Resource = "arn:aws:ec2:*:${var.AWS_ACC}:key-pair/fghub-*-${var.ENV}"
