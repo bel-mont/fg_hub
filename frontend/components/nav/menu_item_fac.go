@@ -1,6 +1,8 @@
 package nav
 
-func StreetFighterMenuItem() MenuItem {
-	sf := MenuItem{Icon: "test", Label: "SF Label", Href: "href test"}
-	return sf
+import "fg_hub/frontend/components/core"
+
+func SeriesMenuItem() *MenuItem {
+	series := MenuItem{Icon: &core.Icon{Name: "gamepad"}, Label: "Series", Href: "/series"}
+	return &series
 }

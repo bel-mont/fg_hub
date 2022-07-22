@@ -39,6 +39,7 @@ func main() {
 	http.Handle("/", &app.Handler{
 		Name:        "FG Hub",
 		Description: "Fighting Games",
+		Scripts:     []string{"https://kit.fontawesome.com/f2abf43f9c.js"},
 	})
 
 	if err := http.ListenAndServe(":8000", nil); err != nil {

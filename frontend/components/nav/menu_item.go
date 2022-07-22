@@ -1,14 +1,19 @@
 package nav
 
-import "github.com/maxence-charriere/go-app/v9/pkg/app"
+import (
+	"fg_hub/frontend/components/core"
+	"github.com/maxence-charriere/go-app/v9/pkg/app"
+)
 
 type MenuItem struct {
 	app.Compo
-	Icon  string // TODO: Change to a struct
-	Label string
-	Href  string
+	Icon     *core.Icon
+	Label    string
+	Href     string
+	Children []MenuItem
 }
 
 func (m *MenuItem) Render() app.UI {
-	return app.A().Href(m.Href).Text(m.Label)
+	link := app.A().Href(m.Href).Text(m.Label)
+	return app.Li().Body(m.Icon, link)
 }

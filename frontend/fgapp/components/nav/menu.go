@@ -15,9 +15,7 @@ func (m *Menu) Render() app.UI {
 }
 
 func (m *Menu) GetMenuItems() []nav.MenuItem {
-	// TODO: Inject DB values
-	sf := nav.MenuItem{Icon: "test", Label: "SF Label", Href: "href test"}
-	gg := nav.MenuItem{Icon: "test", Label: "GG Label", Href: "href test"}
-	items := []nav.MenuItem{sf, gg}
+	series := *nav.SeriesMenuItem()
+	items := []nav.MenuItem{series}
 	return items
 }

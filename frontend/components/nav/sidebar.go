@@ -8,10 +8,10 @@ type Sidebar struct {
 }
 
 func (s *Sidebar) Render() app.UI {
-	var listItems []app.UI
+	listItems := make([]MenuItem, len(s.Items))
 	for _, item := range s.Items {
-		// If I do not call render here, it errors out later for some reason
-		listItems = append(listItems, app.Li().Body((&item).Render()))
+		listItems = append(listItems, item)
 	}
-	return app.Ul().Body(listItems...)
+	zz := s.Items[0]
+	return app.Ul().Body(&zz)
 }
