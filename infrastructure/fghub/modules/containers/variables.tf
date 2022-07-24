@@ -1,6 +1,6 @@
 variable "ENV" {}
 
-variable "SUBNETS" {
+variable "PUBLIC_SUBNETS" {
   type = list(string)
 }
 

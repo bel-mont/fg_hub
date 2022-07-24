@@ -1,10 +1,10 @@
-resource "aws_ecs_service" "fghub-web-dev" {
+resource "aws_ecs_service" "fghub-web" {
   name            = "fghub-web-${var.ENV}"
-  cluster         = aws_ecs_cluster.fghub-cluster-dev.id
+  cluster         = aws_ecs_cluster.fghub-cluster.id
   task_definition = aws_ecs_task_definition.fghub-web.arn
   desired_count   = 1
   network_configuration {
-    subnets = var.SUBNETS
+    subnets = var.PUBLIC_SUBNETS
   }
   #  iam_role        = aws_iam_role.foo.arn
   #  depends_on      = [aws_iam_role_policy]
