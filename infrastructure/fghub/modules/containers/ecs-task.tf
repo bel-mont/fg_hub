@@ -6,7 +6,7 @@ resource "aws_ecs_task_definition" "fghub-web" {
   container_definitions = jsonencode([
     {
       name         = "client-fgapp"
-      image        = "1.23.0-alpine" # TODO: replace with webapp
+      image        = "nginx:1.23.0-alpine" # TODO: replace with webapp
       essential    = true
       portMappings = [
         {

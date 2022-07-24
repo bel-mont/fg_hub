@@ -39,3 +39,22 @@ resource "aws_iam_policy" "dev-ec2-access" {
     ]
   })
 }
+
+resource "aws_iam_policy" "dev-ec2-autoscaling-access" {
+  name        = "FGHubDevEC2AutoscalingAccess"
+  path        = "/"
+  description = "Grants EC2 Autoscaling create / delete access on dev resources."
+
+  policy = jsonencode({
+    Version   = "2012-10-17"
+    Statement = [
+      {
+        Action = [
+          "autoscaling:SetInstanceProtection",
+        ]
+        Effect   = "Allow"
+        Resource = "arn:aws:autoscaling:*:${var.AWS_ACC}:fghub-*-${var.ENV}"
+      },
+    ]
+  })
+}
