@@ -8,7 +8,7 @@ require (
 	github.com/golang-migrate/migrate/v4 v4.15.2
 	github.com/google/uuid v1.3.0
 	github.com/maxence-charriere/go-app/v9 v9.5.1
-	github.com/uptrace/bun v1.1.6
+	github.com/uptrace/bun v1.1.7
 	github.com/uptrace/bun/dialect/pgdialect v1.1.6
 	github.com/uptrace/bun/driver/pgdriver v1.1.6
 	github.com/vektah/gqlparser/v2 v2.4.7
@@ -21,7 +21,6 @@ require (
 	github.com/go-playground/universal-translator v0.18.0 // indirect
 	github.com/go-playground/validator/v10 v10.11.0 // indirect
 	github.com/goccy/go-json v0.9.10 // indirect
-	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/gorilla/websocket v1.5.0 // indirect
 	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/hashicorp/go-multierror v1.1.1 // indirect
