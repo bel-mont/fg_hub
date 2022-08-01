@@ -9,7 +9,7 @@ require (
 	github.com/google/uuid v1.3.0
 	github.com/maxence-charriere/go-app/v9 v9.5.1
 	github.com/uptrace/bun v1.1.7
-	github.com/uptrace/bun/dialect/pgdialect v1.1.6
+	github.com/uptrace/bun/dialect/pgdialect v1.1.7
 	github.com/uptrace/bun/driver/pgdriver v1.1.7
 	github.com/vektah/gqlparser/v2 v2.4.7
 )
