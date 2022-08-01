@@ -15,7 +15,7 @@ resource "aws_launch_configuration" "fghub-web-launchconfig" {
   associate_public_ip_address = true
   key_name                    = aws_key_pair.fghub-web-keypair.key_name
   iam_instance_profile        = aws_iam_instance_profile.ecs-ec2-role.id
-  security_groups             = [aws_security_group.fghub-web-securitygroup.id]
+  security_groups             = [aws_security_group.fghub-web-alb-securitygroup.id]
   user_data                   = "#!/bin/bash\necho ECS_CLUSTER=${aws_ecs_cluster.fghub-cluster.name} >> /etc/ecs/ecs.config"
   lifecycle {
     create_before_destroy = true
