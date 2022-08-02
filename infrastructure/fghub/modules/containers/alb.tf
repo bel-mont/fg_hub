@@ -3,7 +3,7 @@ resource "aws_alb" "fghub-web-alb" {
   subnets                          = var.PUBLIC_SUBNETS
   load_balancer_type               = "application"
   enable_cross_zone_load_balancing = true
-  security_groups = [aws_security_group.fghub-web-alb-securitygroup.id]
+  security_groups                  = [aws_security_group.fghub-alb-securitygroup.id]
 }
 
 resource "aws_alb_listener" "fghub-web-app" {
@@ -23,7 +23,7 @@ resource "aws_alb_listener" "fghub-web-app" {
 }
 
 resource "aws_alb_target_group" "fghub-web-app" {
-  name = "fghub-web-app-${var.ENV}"
+  name                 = "fghub-web-app-${var.ENV}"
   port                 = "80"
   protocol             = "TCP"
   target_type          = "ip"

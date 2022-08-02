@@ -1,6 +1,6 @@
-resource "aws_security_group" "fghub-web-alb-securitygroup" {
+resource "aws_security_group" "fghub-alb-securitygroup" {
   vpc_id      = var.VPC_ID
-  name        = "fghub-web-alb-securitygroup-${var.ENV}"
+  name        = "fghub-alb-securitygroup-${var.ENV}"
   description = "Manages access to the FGHub load balancer"
   egress {
     from_port   = 0
@@ -22,9 +22,9 @@ resource "aws_security_group" "fghub-web-alb-securitygroup" {
   }
 }
 
-resource "aws_security_group" "fghub-ecs-tasks-security-group" {
+resource "aws_security_group" "fghub-ecs-tasks-web-security-group" {
   vpc_id      = var.VPC_ID
-  name        = "fghub-ecs-task-securitygroup-${var.ENV}"
+  name        = "fghub-ecs-task-web-securitygroup-${var.ENV}"
   description = "Manage access into the ECS tasks"
   egress {
     from_port   = 0
@@ -36,6 +36,6 @@ resource "aws_security_group" "fghub-ecs-tasks-security-group" {
     from_port       = 80
     to_port         = 80
     protocol        = "tcp"
-    security_groups = [aws_security_group.fghub-web-alb-securitygroup.id]
+    security_groups = [aws_security_group.fghub-alb-securitygroup.id]
   }
 }

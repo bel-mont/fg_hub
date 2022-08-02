@@ -29,3 +29,8 @@ resource "aws_iam_group_policy_attachment" "fghub-devops-dev-iam" {
   group      = aws_iam_group.fghub-devops-dev.name
   policy_arn = aws_iam_policy.dev-iam-access.arn
 }
+
+resource "aws_iam_group_policy_attachment" "fghub-ec2-balancing-dev-iam" {
+  group      = aws_iam_group.fghub-devops-dev.name
+  policy_arn = aws_iam_policy.dev-ec2-balancing-access.arn
+}

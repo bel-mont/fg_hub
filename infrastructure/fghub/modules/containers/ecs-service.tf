@@ -6,9 +6,7 @@ resource "aws_ecs_service" "fghub-web" {
   #  task_role_arn      = aws_iam_role.ecs-demo-task-role.arn
   desired_count   = 1
   launch_type     = "FARGATE"
-  network_configuration {
-    subnets = var.PUBLIC_SUBNETS
-  }
+  depends_on      = [aws_alb.fghub-web-alb]
   #  iam_role        = aws_iam_role.foo.arn
   #    depends_on      = [aws_iam_role_policy.foo]
 
@@ -17,6 +15,13 @@ resource "aws_ecs_service" "fghub-web" {
     container_name   = "fghub-web-app-${var.ENV}"
     container_port   = 80
   }
+
+  network_configuration {
+    subnets          = var.PRIVATE_SUBNETS
+    security_groups  = [aws_security_group.fghub-ecs-tasks-web-security-group.id]
+    assign_public_ip = true
+  }
+
   #
   #  placement_constraints {
   #    type       = "memberOf"
