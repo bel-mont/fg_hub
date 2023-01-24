@@ -3,7 +3,7 @@ module fg_hub
 go 1.18
 
 require (
-	github.com/99designs/gqlgen v0.17.21
+	github.com/99designs/gqlgen v0.17.24
 	github.com/gin-gonic/gin v1.8.1
 	github.com/golang-migrate/migrate/v4 v4.15.2
 	github.com/google/uuid v1.3.0
